@@ -80,11 +80,6 @@
     <p class="value"><span id="subject" class="inline"></span> | <span id="serial" class="inline"></span></p>
   </div>
 
-  <!--<div class="section">
-    <p class="label">Deposit Paid</p>
-    <p class="value" id="deposit"></p>
-  </div> -->
-
   <hr>
 
   <script>
@@ -99,14 +94,12 @@
       const serial = getParam("serial");
       const name = getParam("name");
       const jobtype = getParam("jobtype");
-      const deposit = getParam("deposit");
 
       document.getElementById("ref").textContent = ref;
       document.getElementById("name").textContent = name;
       document.getElementById("subject").textContent = subject;
       document.getElementById("serial").textContent = serial;
       document.getElementById("jobtype").textContent = jobtype;
-      document.getElementById("deposit").textContent = deposit ? deposit + " Inc. VAT" : "";
 
       if (ref) {
         JsBarcode("#barcode", ref, {
