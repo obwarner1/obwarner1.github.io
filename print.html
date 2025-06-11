@@ -8,28 +8,37 @@
       font-family: sans-serif;
       width: 80mm;
       margin: 0;
-      padding: 10px;
+      padding: 20px;
       text-align: center;
     }
     h1 {
-      font-size: 18px;
-      margin: 10px 0;
+      font-size: 22px;
+      margin: 20px 0;
     }
     p {
-      margin: 5px 0;
+      margin: 20px 0;
+      font-size: 16px;
+    }
+    .label {
+      font-weight: bold;
       font-size: 14px;
+      margin-top: 20px;
+    }
+    .value {
+      font-size: 18px;
+      margin-top: 5px;
     }
     img.logo {
       max-width: 100%;
       height: auto;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
     }
     #barcode {
-      margin: 10px auto;
+      margin: 20px auto;
       display: block;
     }
     hr {
-      margin: 15px 0;
+      margin: 30px 0;
     }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
@@ -38,8 +47,16 @@
   <img class="logo" src="https://www.fretronics.com/wp-content/uploads/2022/11/Logo.png" alt="Fretronics Logo" />
   <h1>WORK ORDER</h1>
   <svg id="barcode"></svg>
-  <p id="ref"></p>
-  <p id="subject"></p>
+
+  <p class="label">RMA</p>
+  <p class="value" id="ref"></p>
+
+  <p class="label">Item</p>
+  <p class="value" id="subject"></p>
+
+  <p class="label">Serial Number</p>
+  <p class="value" id="serial"></p>
+
   <hr>
   <p><strong>END OF WORK ORDER</strong></p>
 
@@ -52,9 +69,11 @@
     function renderReceipt() {
       const ref = getParam("ref");
       const subject = getParam("subject");
+      const serial = getParam("serial");
 
-      document.getElementById("ref").textContent = "RMA: " + ref;
-      document.getElementById("subject").textContent = "Item: " + subject;
+      document.getElementById("ref").textContent = ref;
+      document.getElementById("subject").textContent = subject;
+      document.getElementById("serial").textContent = serial;
 
       if (ref) {
         JsBarcode("#barcode", ref, {
