@@ -11,37 +11,44 @@
       padding: 20px;
       text-align: center;
     }
+
     h1 {
       font-size: 22px;
       margin: 20px 0;
     }
-    p {
-      margin: 20px 0;
-      font-size: 16px;
+
+    .section {
+      margin-top: 25px;
     }
+
     .label {
       font-weight: bold;
       font-size: 14px;
-      margin-top: 20px;
+      margin: 0;
     }
+
     .value {
       font-size: 18px;
-      margin-top: 5px;
+      margin: 2px 0 0 0;
     }
+
     .inline {
       display: inline;
       margin: 0 5px;
     }
+
     img.logo {
       max-width: 100%;
       height: auto;
       margin-top: 50px;
       margin-bottom: 20px;
     }
+
     #barcode {
       margin: 20px auto;
       display: block;
     }
+
     hr {
       margin: 30px 0;
     }
@@ -53,20 +60,30 @@
   <h1>WORK ORDER</h1>
   <svg id="barcode"></svg>
 
-  <p class="label">RMA</p>
-  <p class="value" id="ref"></p>
+  <div class="section">
+    <p class="label">RMA</p>
+    <p class="value" id="ref"></p>
+  </div>
 
-  <p class="label">Job Type</p>
-  <p class="value" id="jobtype"></p>
+  <div class="section">
+    <p class="label">Job Type</p>
+    <p class="value" id="jobtype"></p>
+  </div>
 
-  <p class="label">Customer</p>
-  <p class="value" id="name"></p>
+  <div class="section">
+    <p class="label">Customer</p>
+    <p class="value" id="name"></p>
+  </div>
 
-  <p class="label">Item</p>
-  <p class="value"><span id="subject" class="inline"></span> | <span id="serial" class="inline"></span></p>
+  <div class="section">
+    <p class="label">Item</p>
+    <p class="value"><span id="subject" class="inline"></span> | <span id="serial" class="inline"></span></p>
+  </div>
 
-  <p class="label">Deposit Paid</p>
-  <p class="value" id="deposit"></p>
+  <div class="section">
+    <p class="label">Deposit Paid</p>
+    <p class="value" id="deposit"></p>
+  </div>
 
   <hr>
 
