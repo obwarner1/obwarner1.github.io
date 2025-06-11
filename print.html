@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Job Receipt</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      width: 80mm;
+      margin: 0;
+      padding: 10px;
+    }
+    h1 { font-size: 18px; margin-bottom: 10px; }
+    p { margin: 5px 0; }
+    hr { margin: 10px 0; }
+  </style>
+</head>
+<body onload="renderReceipt()">
+  <h1>Job Receipt</h1>
+  <p id="ref"></p>
+  <p id="customer"></p>
+  <p id="subject"></p>
+  <hr>
+  <p id="printed"></p>
+
+  <script>
+    function getParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return decodeURIComponent(params.get(name) || "");
+    }
+
+    function renderReceipt() {
+      document.getElementById("ref").textContent = "Ticket Ref: " + getParam("ref");
+      document.getElementById("customer").textContent = "Customer: " + getParam("customer");
+      document.getElementById("subject").textContent = "Make/Model: " + getParam("subject");
+      document.getElementById("printed").textContent = "Printed: " + new Date().toLocaleString();
+
+      setTimeout(() => window.print(), 500);
+    }
+  </script>
+</body>
+</html>
