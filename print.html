@@ -2,28 +2,46 @@
 <html>
 <head>
   <meta charset="UTF-8" />
-  <title>Job Receipt</title>
+  <title>WORK ORDER</title>
   <style>
     body {
       font-family: sans-serif;
       width: 80mm;
       margin: 0;
       padding: 10px;
+      text-align: center;
     }
-    h1 { font-size: 18px; margin-bottom: 10px; }
-    p { margin: 5px 0; }
-    hr { margin: 10px 0; }
-    #barcode { margin-top: 10px; }
+    h1 {
+      font-size: 18px;
+      margin: 10px 0;
+    }
+    p {
+      margin: 5px 0;
+      font-size: 14px;
+    }
+    img.logo {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+    }
+    #barcode {
+      margin: 10px auto;
+      display: block;
+    }
+    hr {
+      margin: 15px 0;
+    }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
 </head>
 <body onload="renderReceipt()">
-  <h1>Job Receipt</h1>
+  <img class="logo" src="https://www.fretronics.com/wp-content/uploads/2022/11/Logo.png" alt="Fretronics Logo" />
+  <h1>WORK ORDER</h1>
+  <svg id="barcode"></svg>
   <p id="ref"></p>
   <p id="subject"></p>
-  <svg id="barcode"></svg>
   <hr>
-  <p id="printed"></p>
+  <p><strong>END OF WORK ORDER</strong></p>
 
   <script>
     function getParam(name) {
@@ -35,9 +53,8 @@
       const ref = getParam("ref");
       const subject = getParam("subject");
 
-      document.getElementById("ref").textContent = "Ticket Ref: " + ref;
-      document.getElementById("subject").textContent = "Make/Model: " + subject;
-      document.getElementById("printed").textContent = "Printed: " + new Date().toLocaleString();
+      document.getElementById("ref").textContent = "RMA: " + ref;
+      document.getElementById("subject").textContent = "Item: " + subject;
 
       if (ref) {
         JsBarcode("#barcode", ref, {
