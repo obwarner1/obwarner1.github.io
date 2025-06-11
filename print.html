@@ -33,8 +33,6 @@
       height: auto;
       margin-top: 50px;
       margin-bottom: 20px;
-      
-      
     }
     #barcode {
       margin: 20px auto;
@@ -54,6 +52,9 @@
   <p class="label">RMA</p>
   <p class="value" id="ref"></p>
 
+  <p class="label">Customer</p>
+  <p class="value" id="name"></p>
+
   <p class="label">Item</p>
   <p class="value" id="subject"></p>
 
@@ -69,10 +70,11 @@
       const ref = getParam("ref");
       const subject = getParam("subject");
       const serial = getParam("serial");
+      const name = getParam("name");
 
       document.getElementById("ref").textContent = ref;
       document.getElementById("subject").textContent = subject;
-   
+      document.getElementById("name").textContent = name;
 
       if (ref) {
         JsBarcode("#barcode", ref, {
