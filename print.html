@@ -98,7 +98,8 @@
       document.getElementById("ref").textContent = ref;
       document.getElementById("name").textContent = name;
       document.getElementById("subject").textContent = subject;
-      document.getElementById("serial").textContent = serial || "";
+      const rawSerial = getParam("serial");
+      document.getElementById("serial").textContent = (rawSerial && rawSerial !== "undefined") ? rawSerial : "";
       document.getElementById("jobtype").textContent = jobtype;
 
       if (ref) {
