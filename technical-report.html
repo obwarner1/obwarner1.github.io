@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Technical Report</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 10mm;
+    }
+
+    body {
+      font-family: sans-serif;
+      margin: 0 auto;
+      padding: 10mm;
+      max-width: 190mm;
+      font-size: 9pt;
+      color: #000;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+
+    .header img {
+      max-height: 45px;
+    }
+
+    .header-info {
+      text-align: right;
+      font-size: 8.5pt;
+      line-height: 1.3;
+    }
+
+    h2 {
+      text-align: center;
+      margin: 8px 0 20px;
+      font-size: 11pt;
+    }
+
+    .section-title {
+      font-size: 9pt;
+      font-weight: bold;
+      margin: 14px 0 4px;
+      border-bottom: 1px solid #000;
+      padding-bottom: 2px;
+    }
+
+    table {
+      width: 100%;
+      margin-bottom: 8px;
+    }
+
+    td {
+      vertical-align: top;
+      padding: 2px 0;
+    }
+
+    .label {
+      font-weight: bold;
+      width: 35%;
+    }
+
+    .block-text {
+      white-space: pre-wrap;
+      font-size: 9pt;
+      margin-top: 2px;
+    }
+
+    .footer {
+      text-align: center;
+      font-weight: bold;
+      margin-top: 30px;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+</head>
+<body>
+
+  <div class="header">
+    <img src="https://www.fretronics.com/wp-content/uploads/2022/11/Logo.png" alt="Fretronics Logo" />
+    <div class="header-info">
+      <strong>Fretronics Engineering Limited</strong><br>
+      Unit 37–38 Elderpark Workspace<br>
+      Glasgow, Scotland, G51 3TR<br><br>
+      +44(0)141 316 3967 | info@fretronics.com | www.fretronics.com<br>
+      Company No. SC743248 | VAT GB423869375
+    </div>
+  </div>
+
+  <h2>Repair Report</h2>
+
+  <svg id="barcode"></svg>
+
+  <div class="section-title">Customer Details</div>
+  <table>
+    <tr><td class="label">Name:</td><td id="name"></td></tr>
+    <tr><td class="label">Email:</td><td id="email"></td></tr>
+    <tr><td class="label">Phone:</td><td id="phone"></td></tr>
+    <tr><td class="label">Billing Address:</td><td id="billing"></td></tr>
+  </table>
+
+  <div class="section-title">Job Details</div>
+  <table>
+    <tr><td class="label">RMA Number:</td><td id="rma"></td></tr>
+    <tr><td class="label">Invoice Number:</td><td id="invoice"></td></tr>
+    <tr><td class="label">Job Type:</td><td id="jobtype"></td></tr>
+    <tr><td class="label">Item:</td><td id="item"></td></tr>
+    <tr><td class="label">Serial Number:</td><td id="serial"></td></tr>
+    <tr><td class="label">Other References:</td><td id="refs"></td></tr>
+  </table>
+
+  <div class="section-title">Fault Description from Customer</div>
+  <div class="block-text" id="fault"></div>
+
+  <div class="section-title">Repair Notes</div>
+  <div class="block-text" id="repair"></div>
+
+  <div class="footer">END OF REPORT</div>
+
+  <script>
+    function getParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return decodeURIComponent(params.get(name) || "").replace(/\+/g, " ");
+    }
+
+    function renderReport() {
+      const fields = [
+        "rma", "invoice", "jobtype", "name", "email", "phone", "billing",
+        "item", "serial", "refs", "fault", "repair"
+      ];
+      fields.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          const val = getParam(id);
+          el.textContent = (val && val !== "undefined") ? val : "";
+        }
+      });
+
+      const rma = getParam("rma");
+      if (rma) {
+        JsBarcode("#barcode", rma, {
+          format: "CODE128",
+          displayValue: false,
+          height: 40,
+          margin: 0
+        });
+      }
+    }
+
+    window.onload = renderReport;
+  </script>
+</body>
+</html>
